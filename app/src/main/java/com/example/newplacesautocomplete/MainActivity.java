@@ -19,8 +19,18 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
+
+    /*
+    *Client that exposes the Places API methods
+     */
     PlacesClient placesClient;
+
+/*
+* Token used for sessionizing multiple instances of FindAutocompletePredictionsRequest.
+* The same token can also be used for a subsequent FetchPlaceRequest on one of the autocomplete prediction results returned.
+* */
     AutocompleteSessionToken token;
+
     private String API_KEY_ID="Your google api key";
     private AutoCompleteTextView autocomplete_place;
     private PlaceAutocompleteAdapter mAdapter;
@@ -40,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         autocomplete_place=findViewById(R.id.autocomplete_place);
 
         mCreatRequest(placesClient,token);
+        autocomplete_place.setOnItemClickListener(mAutocompleteClickListener);
     }
 
     private void mCreatRequest(PlacesClient placesClient, AutocompleteSessionToken token) {
